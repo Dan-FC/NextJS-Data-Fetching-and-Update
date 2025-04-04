@@ -18,11 +18,25 @@ export default function Home() {
             () => router.push("/fetching")
           }
         /> 
+
+        <Tab 
+          text = "Fetching W/ServerActions"
+          onClick = { 
+            () => router.push("/fetching/w_server_actions")
+          }
+        />
         
         <Tab 
           text = "Updating"
           onClick = { 
             () => router.push("/updating")
+          }
+        />
+
+        <Tab 
+          text = "Updating W/ServerActions"
+          onClick = { 
+            () => router.push("/updating/w_server_actions")
           }
         />
 

@@ -1,15 +1,17 @@
 "use client";
-
+//! Usando hook useSWR
 import useSWR from "swr";
 import styles from "./page.module.css";
 import { Button } from "@/components/Button/Button";
 import { useState } from "react";
 
+//* Nos pide crear un fetcher
 const fetcher = async (url: string) => {
-    const res = await fetch(url, { method: "GET" });
+    const res = await fetch(url + "/sports", { method: "GET" });
 
     if (!res.ok) {
         const text = await res.text();
+        //! se utiliza throw
         throw new Error(`Error: ${res.status} - ${text}`);
     }
 
@@ -24,11 +26,15 @@ const fetcher = async (url: string) => {
 
 export default function Fetching() {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    //? Opcional crear un useState o if para ver s tu url esta en las envs
     const [shouldFetch, setShouldFetch] = useState(false);
 
+    //! construimos el hook de SWR que tiene por predeterminado 
+    //* los atributos data, error, isLoading
+    //* mutate es una función que ejecutará nuestro hook
     const { data, error, isLoading, mutate } = useSWR(
-        shouldFetch ? apiUrl : null,
-        fetcher
+        shouldFetch ? apiUrl : null, //! si esta la url, ponla
+        fetcher //! usar la funcion fetcher
     );
 
     const handleClick = () => {
