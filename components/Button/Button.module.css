@@ -1,0 +1,52 @@
+.buttonLarge {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    background-color: var(--color-Button);
+    width: 22rem;
+    height: 7rem;
+    border-radius: 1.5rem;
+    cursor: pointer;
+    border: 0.3rem solid black;
+}
+
+.buttonSmall {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    background-color: var(--color-Button);
+    width: 10rem;
+    height: 5rem;
+    border-radius: 1.5rem;
+    cursor: pointer;
+    border: 0.3rem solid black;
+}
+
+.buttonTextLarge {
+    font-family: "SuperSquad", sans-serif;
+    letter-spacing: .2rem;
+    font-size: 1.9rem;
+    width: 14rem;
+    color: var(--color-text);
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 0.8rem;
+    line-height: 2.5rem;
+}
+
+.buttonTextSmall {
+    font-family: "SuperSquad", sans-serif;
+    letter-spacing: .15rem;
+    font-size: .8rem;
+    width: 6rem;
+    color: var(--color-text);
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    margin-top: .9rem;
+}
+
+.disabled {
+    pointer-events: none;
+}

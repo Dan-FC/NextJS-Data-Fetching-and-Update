@@ -1,6 +1,9 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-Title: #FFB200;
+  --color-Button: #92199f;
+  --color-Box: #e42b0e;
+  --color-background: #5687e8;
+  --color-text: #000000;
 }
 
 @media (prefers-color-scheme: dark) {
