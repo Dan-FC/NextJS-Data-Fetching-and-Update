@@ -1,9 +1,7 @@
 "use client";
 
 import styles from "./page.module.css";
-import { Grid } from "../../components/Grid/Grid";
-import { Tab } from "../../components/Tab/Tab"
-import { Button } from "../../components/Button/Button";
+import { Tab } from "@/components/Tab/Tab"
 import { useRouter } from "next/navigation";
 
 export default function Home() {
