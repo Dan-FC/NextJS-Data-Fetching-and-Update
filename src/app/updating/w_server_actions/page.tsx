@@ -1,47 +1,26 @@
 "use client";
 
 import styles from "./page.module.css";
-import { getSportsAction } from "@/actions/getSportsAction";
-import { Button } from "@/components/Button/Button";
-import { useState } from "react";
 
+import { postSportAction } from "@/actions/postSportAction";
 
 export default function UpdateWActions() {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-    const [isLoading, setLoading] = useState(false);
-    const [sports, setSports] = useState<any>(null);
+    //* este chequeo ya no es optimo cuando usamos actions
+    // //const [isLoading, setLoading] = useState(false);
 
-    const handleClick = async () => {
-        try {
-            if (!apiUrl) {
-                console.error("API URL is not defined in environment variables.");
-                return;
-            }
-            setLoading(true);
-                    
-            const data = await getSportsAction(apiUrl);
-            setSports(data);
-        } catch (error) {
-            console.error("Error fetching sports data:", error);
-        } finally {
-            setLoading(false);
-        }
-    }
-
+    //* Utilizamos mejor el hook de useActionState docs = https://react.dev/reference/react/useActionState
+    //const [state, formAction, pending] = useActionState(postSportAction, null)
+    //! Pero no hay ejemplos de uso suficientes
     return (
         <div className={styles.container}>
-            <Button
-                onClick={ handleClick }
-                text="Fetch Data using Action"
-                loading={isLoading}
-                size="small"
-            />
+            <form action={postSportAction}>
+                <input type="text" name="sport_name" />
+                <button type="submit">Create Sport</button>
+            </form>
             <br />
             <br />
             <p className={styles.data}>
-                {sports ? JSON.stringify(sports, null, 2) : ""}
             </p>
-            {isLoading && <p>Cargando...</p>}
         </div>
     );
 }
