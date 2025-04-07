@@ -26,7 +26,7 @@ export default function ClientComponents() {
               onClick = {
                 () => router.push("/from_client_component/fetching")
               }
-              setColor = "yellow"
+              
             /> 
 
             <Tab 
@@ -34,14 +34,14 @@ export default function ClientComponents() {
               onClick = { 
                 () => router.push("from_client_component/updating")
               }
-              setColor="yellow"
+              
             />
             <Tab 
-              text = "Updating w/ Server Actions"
+              text = "Updating+Server Actions"
               onClick = { 
                 () => router.push("from_client_component/updating_with_actions")
               }
-              setColor="yellow"
+            
             />
           </div>
           <Button

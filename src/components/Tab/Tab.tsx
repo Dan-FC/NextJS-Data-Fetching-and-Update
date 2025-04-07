@@ -12,7 +12,7 @@ export const Tab = ( props : TabProps) => {
         <>
             <a onClick={ props.onClick }>
                 <div className={styles.container} style={{ backgroundColor: props.setColor}}>
-                    <i><p className={styles.text}> { props.text }</p></i>
+                    <p className={styles.text}> { props.text }</p>
                 </div>
             </a>
         </>

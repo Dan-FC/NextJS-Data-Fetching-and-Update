@@ -26,7 +26,7 @@ export default function Home() {
               onClick = {
                 () => router.push("from_server_component/fetching")
               }
-              setColor = "yellow"
+              
             /> 
 
             <Tab 
@@ -34,7 +34,7 @@ export default function Home() {
               onClick = { 
                 () => router.push("from_server_component/updating")
               }
-              setColor="yellow"
+              
             />
           </div>
           <Button
