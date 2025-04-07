@@ -11,10 +11,18 @@ import { DataContainer } from "@/components/DataContainer/DataContainer";
 
 export default function ClientFetching() {
   const router = useRouter();
-
-  const fetcher: Fetcher<User[]> = (url: string) => fetch(url).then(res => res.json());
   const apiURL = process.env.NEXT_PUBLIC_API_URL || "";
-  const { data, isLoading, error } = useSWR(apiURL + "/users", fetcher);
+
+  //! useSWR no se puede utilizar en un server component porque usa estados
+  
+  /**
+   * @param Fetcher<User[]> utilizamos el tipo de dato Fetcher para despues--
+   * despues especificar la respuesta que recibiremos
+   * @param url se refiere a url de la api
+   * @returns un arreglo de Usuarios despues de ser parseado con json()
+   */
+  const fetcher: Fetcher<User[]> = (url: string) => fetch(url).then(res => res.json());
+  const { data, isLoading, error, mutate } = useSWR(apiURL + "/users", fetcher);
 
   return (
     <div className={styles.page}>
@@ -36,7 +44,7 @@ export default function ClientFetching() {
           <Button
             text= "Refresh"
             onClick={
-              () => router.refresh()
+              () => mutate()
             }
             loading = {false}
             size="small"
@@ -44,6 +52,7 @@ export default function ClientFetching() {
           <div className={styles.dataContainer}>
             {isLoading ? (<div>Loading...</div>) : <></>}
             {error ? (<div>Error loading data</div>) : <></>}
+            {/* Si hay data mostrarla  */}
             {data ? (<DataContainer users={data} />) : <></>}
           </div>
         </div>
