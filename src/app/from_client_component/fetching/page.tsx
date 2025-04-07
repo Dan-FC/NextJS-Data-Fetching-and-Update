@@ -1,62 +1,53 @@
 "use client";
-//! Usando hook useSWR
-import useSWR from "swr";
+
 import styles from "./page.module.css";
+import { useRouter } from "next/navigation";
+import useSWR, {Fetcher} from "swr";
+import { User } from "@/types/User"
+
+import { Title } from "@/components/Title/Title";
 import { Button } from "@/components/Button/Button";
-import { useState } from "react";
+import { DataContainer } from "@/components/DataContainer/DataContainer";
 
-//* Nos pide crear un fetcher
-const fetcher = async (url: string) => {
-    const res = await fetch(url + "/sports", { method: "GET" });
+export default function ClientFetching() {
+  const router = useRouter();
 
-    if (!res.ok) {
-        const text = await res.text();
-        //! se utiliza throw
-        throw new Error(`Error: ${res.status} - ${text}`);
-    }
+  const fetcher: Fetcher<User[]> = (url: string) => fetch(url).then(res => res.json());
+  const apiURL = process.env.NEXT_PUBLIC_API_URL || "";
+  const { data, isLoading, error } = useSWR(apiURL + "/users", fetcher);
 
-    const contentType = res.headers.get("content-type");
-    if (!contentType?.includes("application/json")) {
-        const text = await res.text();
-        throw new Error("Expected JSON but got: " + text.slice(0, 100));
-    }
-
-    return res.json();
-};
-
-export default function Fetching() {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-    //? Opcional crear un useState o if para ver s tu url esta en las envs
-    const [shouldFetch, setShouldFetch] = useState(false);
-
-    //! construimos el hook de SWR que tiene por predeterminado 
-    //* los atributos data, error, isLoading
-    //* mutate es una función que ejecutará nuestro hook
-    const { data, error, isLoading, mutate } = useSWR(
-        shouldFetch ? apiUrl : null, //! si esta la url, ponla
-        fetcher //! usar la funcion fetcher
-    );
-
-    const handleClick = () => {
-        if (!shouldFetch) setShouldFetch(true);
-        else mutate();
-    };
-
-    return (
+  return (
+    <div className={styles.page}>
+      <main className={styles.main}>
         <div className={styles.container}>
-            <Button
-                onClick={handleClick}
-                text="Fetch Data"
-                loading={isLoading}
-                size="small"
+          <div className={styles.titleContainer}>
+            <Title
+              text="Fetching (Client):"
             />
-            <br />
-            <br />
-            <p className={styles.data}>
-                {data ? JSON.stringify(data, null, 2) : ""}
-            </p>
-            {error && <p>Error: {error.message}</p>}
-            {isLoading && <p>Cargando...</p>}
+          </div>
+          <Button
+            text= "Go Back"
+            onClick={
+              () => router.back()
+            }
+            loading = {false}
+            size="small"
+          />
+          <Button
+            text= "Refresh"
+            onClick={
+              () => router.refresh()
+            }
+            loading = {false}
+            size="small"
+          />
+          <div className={styles.dataContainer}>
+            {isLoading ? (<div>Loading...</div>) : <></>}
+            {error ? (<div>Error loading data</div>) : <></>}
+            {data ? (<DataContainer users={data} />) : <></>}
+          </div>
         </div>
-    );
+      </main>
+    </div>
+  );
 }

@@ -7,7 +7,7 @@ import { Tab } from "@/components/Tab/Tab";
 import { Title } from "@/components/Title/Title";
 import { Button } from "@/components/Button/Button";
 
-export default function Home() {
+export default function ClientComponents() {
   const router = useRouter();
 
   return (
@@ -24,7 +24,7 @@ export default function Home() {
             <Tab 
               text = "Fetching" 
               onClick = {
-                () => router.push("from_client_component/fetching")
+                () => router.push("/from_client_component/fetching")
               }
               setColor = "yellow"
             /> 
@@ -39,7 +39,7 @@ export default function Home() {
             <Tab 
               text = "Updating w/ Server Actions"
               onClick = { 
-                () => router.push("from_client_component/updating")
+                () => router.push("from_client_component/updating_with_actions")
               }
               setColor="yellow"
             />
