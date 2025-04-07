@@ -1,5 +1,6 @@
-"use client";
-
+//!Por defecto todo componente en Next es un Server Component a menos que uses
+//!la directiva "use client"
+"use client"
 import styles from "./page.module.css";
 import { useRouter } from "next/navigation";
 
@@ -34,7 +35,6 @@ export default function ServerComponents() {
               onClick = { 
                 () => router.push("from_server_component/updating")
               }
-              
             />
           </div>
           <Button

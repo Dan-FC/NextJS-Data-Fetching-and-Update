@@ -1,12 +1,13 @@
 "use server";
 
 import styles from "./page.module.css";
-import { getAllUsersAction } from "@/actions/getAllUsers";
+import { getUserByNameAction } from "@/actions/getUserByName";
 
+import { UserInterface } from "@/interfaces/user";
 import { Title } from "@/components/Title/Title";
 
 export default async function ServerFetching() {
-  const users = await getAllUsersAction();
+  const user : UserInterface = await getUserByNameAction("John Update");
 
   return (
     <div className={styles.page}>
@@ -17,12 +18,12 @@ export default async function ServerFetching() {
               text="Fetching (Server):"
             />
           </div>
-          <p className={styles.titleResponse}>Users:</p>
+          <p className={styles.titleResponse}>Role Based Interface:</p>
           <ul>
-            {users ? (
-              <p>{users.message}</p>      
+            {user && user.role === "Admin"? (
+              <p>"Admin Interface"</p>      
             ) : (
-              <p>No Users</p>
+              <p>"Visitor Interface"</p>
             )}
           </ul>
         </div>
