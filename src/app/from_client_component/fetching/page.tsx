@@ -25,6 +25,7 @@ export default function ClientFetching() {
               text="Fetching (Client):"
             />
           </div>
+          
           <Button
             text= "Go Back"
             onClick={

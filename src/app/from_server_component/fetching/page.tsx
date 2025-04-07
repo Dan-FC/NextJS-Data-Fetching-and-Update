@@ -1,62 +1,37 @@
-"use client";
-//! Usando hook useSWR
-import useSWR from "swr";
+// app/from_server_component/fetching/page.tsx
+
 import styles from "./page.module.css";
 import { Button } from "@/components/Button/Button";
-import { useState } from "react";
+import { DataContainer } from "@/components/DataContainer/DataContainer";
+import { Title } from "@/components/Title/Title";
+import { User } from "@/types/User";
 
-//* Nos pide crear un fetcher
-const fetcher = async (url: string) => {
-    const res = await fetch(url + "/sports", { method: "GET" });
+// Server
+export default async function ServerFetching() {
+  // Realiza el fetch en el servidor
+  const apiURL = process.env.NEXT_PUBLIC_API_URL || "";
+  const response = await fetch(`${apiURL}/users`);
+  const users: User[] = await response.json();
 
-    if (!res.ok) {
-        const text = await res.text();
-        //! se utiliza throw
-        throw new Error(`Error: ${res.status} - ${text}`);
-    }
-
-    const contentType = res.headers.get("content-type");
-    if (!contentType?.includes("application/json")) {
-        const text = await res.text();
-        throw new Error("Expected JSON but got: " + text.slice(0, 100));
-    }
-
-    return res.json();
-};
-
-export default function Fetching() {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-    //? Opcional crear un useState o if para ver s tu url esta en las envs
-    const [shouldFetch, setShouldFetch] = useState(false);
-
-    //! construimos el hook de SWR que tiene por predeterminado 
-    //* los atributos data, error, isLoading
-    //* mutate es una función que ejecutará nuestro hook
-    const { data, error, isLoading, mutate } = useSWR(
-        shouldFetch ? apiUrl : null, //! si esta la url, ponla
-        fetcher //! usar la funcion fetcher
-    );
-
-    const handleClick = () => {
-        if (!shouldFetch) setShouldFetch(true);
-        else mutate();
-    };
-
-    return (
+  return (
+    <div className={styles.page}>
+      <main className={styles.main}>
         <div className={styles.container}>
-            <Button
-                onClick={handleClick}
-                text="Fetch Data"
-                loading={isLoading}
-                size="small"
-            />
-            <br />
-            <br />
-            <p className={styles.data}>
-                {data ? JSON.stringify(data, null, 2) : ""}
-            </p>
-            {error && <p>Error: {error.message}</p>}
-            {isLoading && <p>Cargando...</p>}
+          <div className={styles.titleContainer}>
+            <Title text="Fetching (Server):" />
+            <p>Dentro de este componente no se puede agregar interactividad ya que es un Server Componente</p>
+          </div>
+          {/* <Button text="Go Back" onClick={() => window.history.back()} loading={false} size="small" />
+          <Button text="Refresh" onClick={() => window.location.reload()} loading={false} size="small" /> */}
+          <div className={styles.dataContainer}>
+            {users.length === 0 ? (
+              <div>No data found</div>
+            ) : (
+              <DataContainer users={users} />
+            )}
+          </div>
         </div>
-    );
+      </main>
+    </div>
+  );
 }
