@@ -7,7 +7,7 @@ import { Tab } from "@/components/Tab/Tab";
 import { Title } from "@/components/Title/Title";
 import { Button } from "@/components/Button/Button";
 
-export default function Home() {
+export default function ServerComponents() {
   const router = useRouter();
 
   return (
