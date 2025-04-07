@@ -16,7 +16,7 @@ export default function Home() {
         <div className={styles.container}>
           <div className={styles.titleContainer}>
             <Title
-              text="Client Components:"
+              text="Server Components:"
             />
           </div>
         <br></br>
@@ -24,7 +24,7 @@ export default function Home() {
             <Tab 
               text = "Fetching" 
               onClick = {
-                () => router.push("from_client_component/fetching")
+                () => router.push("from_server_component/fetching")
               }
               setColor = "yellow"
             /> 
@@ -32,14 +32,7 @@ export default function Home() {
             <Tab 
               text = "Updating"
               onClick = { 
-                () => router.push("from_client_component/updating")
-              }
-              setColor="yellow"
-            />
-            <Tab 
-              text = "Updating w/ Server Actions"
-              onClick = { 
-                () => router.push("from_client_component/updating")
+                () => router.push("from_server_component/updating")
               }
               setColor="yellow"
             />
