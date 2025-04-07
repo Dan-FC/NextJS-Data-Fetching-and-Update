@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model deportes {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  v    Int    @map("__v")
+  name String
+}
+
+model esportmatches {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  v           Int    @map("__v")
+  division    String
+  esport      String
+  startedAt   String
+  switch      Int
+  teamOneName String
+  teamTwoName String
+}
+
+model matches {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  v           Int    @map("__v")
+  branch      String
+  division    String
+  place       String
+  sport       String
+  startedAt   String
+  teamOneName String
+  teamTwoName String
+  whoWon      String
+}
+
+model racematches {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  v         Int      @map("__v")
+  division  String
+  startedAt String
+  teams     String[]
+  tracks    String[]
+  whoWon    String
+}
+
+model sports {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  v    Int    @map("__v")
+  name String
+}
+
+model teams {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+}
+
+model users {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  v        Int    @map("__v")
+  name     String
+  password String
+  role     String
+}
