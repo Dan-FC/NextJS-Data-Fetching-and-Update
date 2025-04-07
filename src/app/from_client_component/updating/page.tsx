@@ -17,7 +17,7 @@ export default function ClientUpdating() {
     method: "POST",
     body: JSON.stringify({
       userId: 1,
-      title: "Sending information who-knows whre",
+      title: "Sending information to who-knows where",
       body: "Hey lets mine and craft!"
     }),
     headers: {

@@ -20,7 +20,7 @@ export default async function ServerFetching() {
           </div>
           <p className={styles.titleResponse}>Role Based Interface:</p>
           <ul>
-            {user && user.role === "Admin"? (
+            {user && user.role === "Administrador" || user.role === "Admin"? (
               <p>"Admin Interface"</p>      
             ) : (
               <p>"Visitor Interface"</p>

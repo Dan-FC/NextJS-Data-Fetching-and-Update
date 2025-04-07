@@ -21,7 +21,6 @@
   width: 100%;
 }
 
-
 .container {
   display: grid;
   justify-content: center;
@@ -46,4 +45,46 @@
 }
 .response {
   font-size: 3rem;
+}
+
+/* form css aqui dan*/
+.form_container {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #f4f4f4;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form_input {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: border 0.2s ease;
+}
+
+.form_input:focus {
+  border-color: #0070f3;
+  outline: none;
+}
+
+.form_button {
+  padding: 0.75rem 1rem;
+  background-color: #0070f3;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form_button:hover {
+  background-color: #0059c1;
 }

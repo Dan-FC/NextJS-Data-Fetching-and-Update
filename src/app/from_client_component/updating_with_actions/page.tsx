@@ -2,42 +2,27 @@
 
 import styles from "../fetching/page.module.css";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-
-//! Import Actions
-import { createUserAction } from "@/actions/createUser";
-import { getAllUsersAction } from "@/actions/getAllUsers";
+//! new hook just droped
+import { useActionState } from "react";
 
 import { Title } from "@/components/Title/Title";
 import { Button } from "@/components/Button/Button";
-
-interface User {
-  name     : string
-  password : string
-  role     : string
-  v?: number
-}
-
-const userToCreate : User= {
-  name : "John Update",
-  password : "string",
-  role     : "Admin"
-}
+import { createNewUserAction } from "@/actions/form_actions/createNewUser";
 
 export default function ClientWithActions() {
-  const [response, setResponse] = useState("");
   const router = useRouter();
-
-  const handleCreate = async () => {
-    const res = await createUserAction(userToCreate);
-    setResponse(JSON.stringify(res));
-  }
-
-  const handleGet = async () => {
-    const res = await getAllUsersAction();
-    setResponse(JSON.stringify(res))
-  }
   
+  /**
+   * Nosotros decidimos que la mejor manera de usar y entender este hook es así:
+   * 1. agregas message o state para ver el estado de la acción:
+   * (terminó | error | funcionó)
+   * 2. agregas la nueva action, que es ahora la action que pondrás en el form
+   * 3. agregas isPending que es el estado pendiente mientras se hace la action
+   * 4. finalmente al hook agregas tu server action y tu estado inicial
+   *    nuestros estados son texto
+   * */
+  const [message, formAction, isPending] = useActionState(createNewUserAction, null)
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
@@ -48,31 +33,24 @@ export default function ClientWithActions() {
             />
           </div>
           <Button
-            text= "Go Back"
+            size="small"
             onClick={
               () => router.back()
             }
+            text = "Go Back"
             loading = {false}
-            size="small"
           />
-          <Button
-            text= "Create User"
-            onClick={
-              () => handleCreate()
-            }
-            loading = {false}
-            size="small"
-          />
-          <Button
-            text= "Get Users"
-            onClick={
-              () => handleGet()
-            }
-            loading = {false}
-            size="small"
-          />
+          <form className={styles.form_container} action={formAction}>
+            <input type="text" name="name" className={styles.form_input} required />
+            <input type="text" name="password" className={styles.form_input} required />
+            <input type="text" name="role" className={styles.form_input} required />
+            <button type="submit" className={styles.form_button}>
+              Create a New User with Actions
+            </button>
+          </form>
           <p className={styles.titleResponse}>Response:</p>
-          <p> {response}</p>
+          {isPending ? <p>"Sending Data"</p> : <></>}
+          <p>{message}</p>
         </div>
       </main>
     </div>
