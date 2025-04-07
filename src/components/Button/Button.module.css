@@ -16,10 +16,10 @@
     margin-top: 1rem;
     background-color: var(--color-Button);
     width: 10rem;
-    height: 5rem;
-    border-radius: 1.5rem;
+    height: 4rem;
+    border-radius: 1.2rem;
     cursor: pointer;
-    border: 0.3rem solid black;
+    border: 0.2rem solid black;
 }
 
 .buttonTextLarge {
@@ -38,13 +38,13 @@
 .buttonTextSmall {
     font-family: "SuperSquad", sans-serif;
     letter-spacing: .15rem;
-    font-size: .8rem;
+    font-size: 1.2rem;
     width: 6rem;
     color: var(--color-text);
     font-weight: bold;
     text-align: center;
     text-decoration: none;
-    margin-top: .9rem;
+    margin-top: 1.2rem;
 }
 
 .disabled {

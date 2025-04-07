@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 
 import { Tab } from "@/components/Tab/Tab";
 import { Title } from "@/components/Title/Title";
+import { Button } from "@/components/Button/Button";
 
 export default function Home() {
   const router = useRouter();
@@ -15,25 +16,35 @@ export default function Home() {
         <div className={styles.container}>
           <div className={styles.titleContainer}>
             <Title
-              text="Everything about Fetching and Updating"
+              text="Client Components:"
             />
           </div>
         <br></br>
           <div className={styles.tabs}>
             <Tab 
-              text = "From Client Components" 
+              text = "Fetching" 
               onClick = {
                 () => router.push("/from_client_component")
               }
+              setColor = "yellow"
             /> 
 
             <Tab 
-              text = "From Server Components"
+              text = "Updating"
               onClick = { 
                 () => router.push("/from_server_component")
               }
+              setColor="yellow"
             />
           </div>
+          <Button
+            text= "Go Back"
+            onClick={
+              () => router.back()
+            }
+            loading = {false}
+            size="small"
+          />
         </div>
       </main>
     </div>

@@ -1,0 +1,16 @@
+.container {
+    display: inline-block;
+    width: auto;
+    height: auto;
+    
+    border-radius: .4rem;
+    padding: 1rem;
+    border: .3rem solid rgb(5, 105, 80);
+    background-color: var(--color-Title);
+}
+
+.text {
+    color: var(--color-text);
+    font-size: 4rem;
+    margin-left: 2rem;
+}
