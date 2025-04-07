@@ -17,8 +17,8 @@ export default function ClientUpdating() {
     method: "POST",
     body: JSON.stringify({
       userId: 1,
-      title: "Mandando información a quiensabe donde",
-      body: "Hey muy nuevas a todos"
+      title: "Sending information who-knows whre",
+      body: "Hey lets mine and craft!"
     }),
     headers: {
       'Content-type': 'application/json; charset=UTF-8',
@@ -56,11 +56,11 @@ export default function ClientUpdating() {
           <div className={styles.dataContainer}>
             {data ? 
             <>
-              <h1>Posted Data:</h1>
-              <p>ID: {data.id}</p>
-              <p>UserID: {data.userId}</p>
-              <p>Body: {data.body}</p>
-              <p>Title: {data.title}</p>
+              <h1 className={styles.titleResponse}>Posted Data:</h1>
+              <p className={styles.response}>ID: {data.id}</p>
+              <p className={styles.response}>UserID: {data.userId}</p>
+              <p className={styles.response}>Body: {data.body}</p>
+              <p className={styles.response}>Title: {data.title}</p>
             </>:<>No post</>}
           </div>
         </div>
