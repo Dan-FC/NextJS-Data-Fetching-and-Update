@@ -40,7 +40,7 @@ export default function ServerComponents() {
           <Button
             text= "Go Back"
             onClick={
-              () => router.back()
+              () => router.push("/")
             }
             loading = {false}
             size="small"

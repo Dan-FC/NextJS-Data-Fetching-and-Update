@@ -42,7 +42,7 @@ export default function ClientWithActions() {
           />
           <form className={styles.form_container} action={formAction}>
             <input type="text" name="name" className={styles.form_input} required />
-            <input type="text" name="password" className={styles.form_input} required />
+            <input type="password" name="password" className={styles.form_input} required />
             <input type="text" name="role" className={styles.form_input} required />
             <button type="submit" className={styles.form_button}>
               Create a New User with Actions
