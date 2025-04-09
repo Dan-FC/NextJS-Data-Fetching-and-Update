@@ -2,25 +2,19 @@
 
 import styles from "../fetching/page.module.css";
 
-import { createUserAction } from "@/actions/createUser";
-
+import { createPostAction } from "@/actions/createPost";
 import { Title } from "@/components/Title/Title";
-
-interface User {
-  name     : string
-  password : string
-  role     : string
-  v?: number
-}
-
-const userToCreate : User= {
-  name : "John Update",
-  password : "string",
-  role     : "Admin"
-}
+import { Post } from "@/types/Post";
 
 export default async function ClientWithActions() {
-  const response = await createUserAction(userToCreate);
+  const newPost : Post = {
+    userId: 1,
+    title: "Sending information from a sever component",
+    body: "I can't add dinamic interaction to this!!"
+  }
+
+  const apiURL = process.env.NEXT_PUBLIC_API_URL || "";
+  const response : Post | void  = await createPostAction(apiURL + "/posts", newPost) ;
   
   return (
     <div className={styles.page}>
@@ -32,7 +26,14 @@ export default async function ClientWithActions() {
             />
           </div>
           <p className={styles.titleResponse}>Response:</p>
-          <p> {response?.message}</p>
+          {response !== undefined ? 
+            <>
+              <h1 className={styles.titleResponse}>Posted Data:</h1>
+              <p className={styles.response}>ID: {(response as Post).id}</p>
+              <p className={styles.response}>UserID: {(response as Post).userId}</p>
+              <p className={styles.response}>Body: {(response as Post).body}</p>
+              <p className={styles.response}>Title: {(response as Post).title}</p>
+            </>:<>No post</>}
         </div>
       </main>
     </div>

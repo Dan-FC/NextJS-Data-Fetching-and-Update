@@ -1,31 +1,35 @@
 "use server";
 
 import styles from "./page.module.css";
-import { getUserByNameAction } from "@/actions/getUserByName";
-
-import { UserInterface } from "@/interfaces/user";
+import { Button } from "@/components/Button/Button";
+import { DataContainer } from "@/components/DataContainer/DataContainer";
 import { Title } from "@/components/Title/Title";
+import { User } from "@/types/User";
 
+// Server
 export default async function ServerFetching() {
-  const user : UserInterface = await getUserByNameAction("John Update");
+  // Realiza el fetch en el servidor
+  const apiURL = process.env.NEXT_PUBLIC_API_URL || "";
+  const response = await fetch(`${apiURL}/users`);
+  const users: User[] = await response.json();
 
   return (
     <div className={styles.page}>
       <main className={styles.main}>
         <div className={styles.container}>
           <div className={styles.titleContainer}>
-            <Title
-              text="Fetching (Server):"
-            />
+            <Title text="Fetching (Server):" />
+            <p>Dentro de este componente no se puede agregar interactividad ya que es un Server Componente</p>
           </div>
-          <p className={styles.titleResponse}>Role Based Interface:</p>
-          <ul>
-            {user && user.role === "Administrador" || user.role === "Admin"? (
-              <p>"Admin Interface"</p>      
+          {/* <Button text="Go Back" onClick={() => window.history.back()} loading={false} size="small" />
+          <Button text="Refresh" onClick={() => window.location.reload()} loading={false} size="small" /> */}
+          <div className={styles.dataContainer}>
+            {users.length === 0 ? (
+              <div>No data found</div>
             ) : (
-              <p>"Visitor Interface"</p>
+              <DataContainer users={users} />
             )}
-          </ul>
+          </div>
         </div>
       </main>
     </div>
