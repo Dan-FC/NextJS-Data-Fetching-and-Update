@@ -6,7 +6,7 @@ import { createPostAction } from "@/actions/createPost";
 import { Title } from "@/components/Title/Title";
 import { Post } from "@/types/Post";
 
-export default async function ClientWithActions() {
+export default async function ServerUpdating() {
   const newPost : Post = {
     userId: 1,
     title: "Sending information from a sever component",

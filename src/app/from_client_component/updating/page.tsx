@@ -34,7 +34,7 @@ export default function ClientUpdating() {
         <div className={styles.container}>
           <div className={styles.titleContainer}>
             <Title
-              text="Fetching (Client):"
+              text="Updating (Client):"
             />
           </div>
           <Button
